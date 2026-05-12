@@ -22,7 +22,7 @@ P_sim_dt = P_task_dt; % Sampling time of simulation
  
 %% Simulink Model Data Files
 i01_data;
-% d01_data;
+d01_data;
 % t02_race;
 
 %% MAD76
