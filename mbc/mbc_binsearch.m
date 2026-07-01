@@ -1,5 +1,5 @@
 function bidx = mbc_binsearch(breakslen, ppbreaks, x)
-%#codegen
+
 % bidx = mbc_binsearch(breaks, x) searches for closest match of x in breaks
 %   breakslen - number of breaks
 %   breaks - are the breaks of a piecewise polynomial

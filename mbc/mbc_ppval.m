@@ -1,5 +1,5 @@
 function [ y, yd, ydd, pidx ] = mbc_ppval(varargin)
-%#codegen
+
 % y = mbc_ppval(pp, x)
 % y = mbc_ppval(ppbreaks, ppcoefs, x, pidx) embedded version of ppval.
 % Used in Simulink code generated for the car.

@@ -1,6 +1,6 @@
 function [ w, widx ]  = mbc_spline_get_reference(s, breakslen, points, ppcoefs, ...
     periodic, vref, Tt, irangemin, irangemax)
-%#codegen
+
 % w  = mbc_spline_get_reference(s, breakslen, points, ppcoefs, ...
 %      periodic, vref, Tt) calculates the reference signal for
 %      path following control.

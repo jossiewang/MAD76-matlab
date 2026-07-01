@@ -1,5 +1,4 @@
 function [ x, imin1 ] = mbc_spline_get_nearest(breakslen, splinepoints, ppcoefs, splineperiodic, s, irangemin, irangemax)
-%#codegen
 % [ x, imin1 ] = mbc_spline_get_nearest(breakslen, splinepoints, ppcoefs, splineperiodic, s) calculates
 % the arc length of the spline point nearest to the point s.
 %
