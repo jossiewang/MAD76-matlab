@@ -1,4 +1,4 @@
-function [state_dot, beta] = continuous_dynamics(state, u)
+function [state_dot] = continuous_dynamics(state, u)
 
     P=get_parameters();
     un = u(1);
@@ -27,7 +27,7 @@ function [state_dot, beta] = continuous_dynamics(state, u)
     if abs(deltan) < eps_deltan
         dpsi = 0;
     else
-        denom = P.P_p_l + P.P_p_EG * (vr^2) * sign(vr);
+        denom = P.P_p_l + P.P_p_EG * (vr^2);% * sign(vr);
         denom_safe = max(abs(denom), eps_den) * sign(denom);
 
         tan_arg = (P.P_p_delta_max * deltan) / P.P_p_deltan_max;
@@ -38,8 +38,4 @@ function [state_dot, beta] = continuous_dynamics(state, u)
     omega_dot = 0;
     dx = vr;
     state_dot = [dsr1; dsr2; dvr; 0; dpsi; omega_dot; dx];
-
-    % Beta-Berechnung
-    a = P.P_p_l / 2;
-    beta = atan(a / P.P_p_l * tan(deltan));
 end
