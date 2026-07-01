@@ -5,7 +5,7 @@ J=0;
 dist=0;
 
 % Loop over prediction horizon
-Q=[1,0,0;0,1,0;0,0,0.4];
+Q=[1,0,0;0,1,0;0,0,10];
 R=[0.2,0;0,0.2];
 
 for i=1:N-1
