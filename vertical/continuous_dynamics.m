@@ -12,7 +12,10 @@ function [state_dot] = continuous_dynamics(state, u)
     else
         dist = un;
     end
-
+    
+    %%
+    %dist=0;
+    %%
     vr = state(3);
     psi = state(5);
     dvr = -vr / P.P_p_T + P.P_p_k / P.P_p_T * (un - dist);

@@ -6,5 +6,6 @@ k2=continuous_dynamics(x+(dt/2)*k1,u);
 k3=continuous_dynamics(x+(dt/2)*k2,u);
 k4=continuous_dynamics(x+dt*k3,u);
 
-x_next = x+(dt/6)*(k1+2*k2+2*k3+k4);  
+x_next = x+(dt/6)*(k1+2*k2+2*k3+k4); 
+
 end

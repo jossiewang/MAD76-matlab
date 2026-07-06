@@ -1,5 +1,4 @@
-function [x_diff,dist] =error_dynamics(spline,state,u,dt)
-    x=simulate_dynamics_rk4(state,u,dt);
+function [x_diff,dist] =error_dynamics(spline,x)
     v_max=0.35;
     s1=x(1);
     s2=x(2);
