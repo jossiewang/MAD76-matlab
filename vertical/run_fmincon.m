@@ -1,11 +1,12 @@
-function u_min = run_fmincon(state, N, spline, u0, lb, ub,dt)
+function u_min = run_fmincon(state, N, spline, u0, lb, ub,dt,x_min,x_max)
 % Diese Funktion läuft NUR im MATLAB-Interpreter (keine Code-Generierung!)
 cost_function = @(u) mpc_cost(u, state, N, spline,dt);
+nonlcon = @(u) mpc_constraints(u, state, N, spline,dt,x_min,x_max);
 %options = optimoptions('fmincon', 'Display', 'none', 'Algorithm', 'sqp');
 options = optimoptions('fmincon', ...
     'MaxIterations', 40, ...
     'MaxFunctionEvaluations', 200, ...
     'StepTolerance', 1e-6, ...
-    'Display', 'iter');
-[u_min, ~] = fmincon(cost_function, u0, [], [], [], [], lb, ub, [],options);
+    'Display', 'none');
+[u_min, ~] = fmincon(cost_function, u0, [], [], [], [], lb, ub, nonlcon,options);
 end
