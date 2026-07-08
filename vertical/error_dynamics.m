@@ -4,11 +4,7 @@ function [x_diff,dist] =error_dynamics(spline,x)
     s2=x(2);
     vr=x(3);
     psi=x(5);
-    s=[s1;s2];
-
-    sc2e_max=0.03;
-    psi_e_max=pi/6;
-    
+    s=[s1;s2];    
     
     breakslen=spline.breakslen;
     points=spline.points;
@@ -23,6 +19,6 @@ function [x_diff,dist] =error_dynamics(spline,x)
    
     v_diff=(v_max-vr);
     dist=double(w(1));
-    x_diff=[sc2e/sc2e_max; psi_e/psi_e_max;v_diff/v_max];
+    x_diff=[sc2e; psi_e;v_diff];
 
 end
