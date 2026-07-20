@@ -5,7 +5,7 @@ params.N  = 20;          % prediction horizon
 params.Ta = 25e-3;       % sampling time [s]
 
 %% Reference generator
-params.v_ref = 0.4;     % desired speed [m/s], start conservative
+params.v_ref = 0.5;     % desired speed [m/s], start conservative
 params.Tt    = 100e-3;   % delay/lookahead time [s]
 params.periodic = true;  % true for closed race track
 
@@ -48,12 +48,12 @@ params.r_ddelta = 2.0;   % steering rate change
 params.v_min = 0.0;      % minimum speed [m/s]
 params.v_max = 0.5;      % maximum speed [m/s]
 
-params.dun_max     = 0.03;  % max motor change per sample
-params.ddeltan_max = 0.15;  % max steering change per sample
+params.dun_max     = 0.0936;  % max motor change per sample, 120% baseline speed control
+params.ddeltan_max = 1.14;  % max steering change per sample, suppose 3 rev/sec
 
 % Optional track corridor constraint.
 % Comment this out first if fmincon has difficulty.
-params.track_half_width = 0.08;  % [m]
+params.track_half_width = 0.06;  % [m]
 
 %% fmincon options
 params.fmincon_options = optimoptions('fmincon', ...
