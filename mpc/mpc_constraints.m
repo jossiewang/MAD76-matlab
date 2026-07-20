@@ -1,18 +1,15 @@
-function [c, ceq] = mpc_constraints(U, z0, u_last, refs, params)
+function [c, ceq] = mpc_constraints(U, z0, refs, params)
 
     U      = double(U(:));
     z      = double(z0(:));
-    u_prev = double(u_last(:));
 
     N = params.N;
 
     v_min = params.v_min;
     v_max = params.v_max;
     track_half_width = params.track_half_width;
-    dun_max = params.dun_max;
-    ddeltan_max = params.ddeltan_max;
 
-    c = zeros(8*N, 1);
+    c = zeros(4*N, 1);
     ceq = [];
 
     k = 1;
@@ -21,15 +18,6 @@ function [c, ceq] = mpc_constraints(U, z0, u_last, refs, params)
         idx = 2*i - 1;
         un_i     = U(idx);
         deltan_i = U(idx+1);
-
-        du1 = un_i     - u_prev(1);
-        du2 = deltan_i - u_prev(2);
-
-        % Rate constraints
-        c(k) =  du1 - dun_max;       k = k + 1;
-        c(k) = -du1 - dun_max;       k = k + 1;
-        c(k) =  du2 - ddeltan_max;   k = k + 1;
-        c(k) = -du2 - ddeltan_max;   k = k + 1;
 
         % Predict next state
         u_i = [un_i; deltan_i];
@@ -52,7 +40,5 @@ function [c, ceq] = mpc_constraints(U, z0, u_last, refs, params)
         c(k) =  s_c2e - track_half_width;  k = k + 1;
         c(k) = -s_c2e - track_half_width;  k = k + 1;
 
-        u_prev(1) = un_i;
-        u_prev(2) = deltan_i;
     end
 end

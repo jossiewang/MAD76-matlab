@@ -17,13 +17,13 @@ ub = double(repmat(u_max, N, 1));
 
 %% cost and constraints
 cost_function = @(u_seq) mpc_cost(u_seq, state_0, u_last, refs, params);
-nonlcon = @(u_seq) mpc_constraints(u_seq, state_0, u_last, refs, params);
+nonlcon = @(u_seq) mpc_constraints(u_seq, state_0, refs, params);
+
+[A_rate, b_rate] = mpc_rate_constraints(N, u_last, params);
 
 options = params.fmincon_options;
 
 %% Solve
-[u_opt, ~, exitflag, output] = fmincon(cost_function, u0, [], [], [], [], lb, ub, nonlcon, options);
-
-j = 100;
+[u_opt, ~, exitflag, output] = fmincon(cost_function, u0, A_rate, b_rate, [], [], lb, ub, nonlcon, options);
 
 end
