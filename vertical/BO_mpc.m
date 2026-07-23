@@ -16,11 +16,11 @@ mpc_params_script; % load it once here, and then change 'params' during BO proce
 
 % first, test BO with simpler case: LQR gain
 num_BOparams = 7;
-lb = [1,    0.1, 1,   0.01, 0.01, 0.1, 0.1]; % Lower bounds for q_c2, q_psi, q_v, r_un, r_delta, r_dun, r_ddelta
-ub = [1000, 100, 100, 10,   10,   10,  10]; % Upper bounds for q_c2, q_psi, q_v, r_un, r_delta, r_dun, r_ddelta
+lb = [300,    0.01, 1,   0.1, 0.005, 0.1, 0.05]; % Lower bounds for q_c2, q_psi, q_v, r_un, r_delta, r_dun, r_ddelta
+ub = [1000, 10, 100, 50,   1,   10,  5]; % Upper bounds for q_c2, q_psi, q_v, r_un, r_delta, r_dun, r_ddelta
 
 %% Initial Data
-X = rand(2,num_BOparams) .* (ub - lb) + lb; % Initial random parameter samples
+X = rand(2,num_BOparams) .* (ub - lb) + lb; % Initial arandom parameter samples
 Y = zeros(size(X,1),1);
 % all_trajectories = cell(size(X,1),1);
 % all_controls = cell(size(X,1),1);
