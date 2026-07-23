@@ -35,14 +35,14 @@ params.integrator = 'euler';     % 'euler' first, later try 'rk4'
 
 %% Cost weights
 params.q_c1  = 0.0;      % longitudinal/tangential error
-params.q_c2  = 200.0;    % lateral error
-params.q_psi = 20.0;     % yaw error
-params.q_v   = 5.0;      % speed error
+params.q_c2  = 850.3888;    % lateral error
+params.q_psi = 0.1;     % yaw error
+params.q_v   = 7.4557;      % speed error
 
-params.r_un     = 0.1;   % motor effort
-params.r_delta  = 0.1;   % steering effort
-params.r_dun    = 2.0;   % motor rate change
-params.r_ddelta = 2.0;   % steering rate change
+params.r_un     = 10;   % motor effort
+params.r_delta  = 0.01;   % steering effort
+params.r_dun    = 5.8332;   % motor rate change
+params.r_ddelta = 0.1;   % steering rate change
 
 %% Optional constraints
 params.v_min = 0.0;      % minimum speed [m/s]
@@ -58,9 +58,9 @@ params.track_half_width = 0.06;  % [m]
 %% fmincon options
 params.fmincon_options = optimoptions('fmincon', ...
     'Algorithm', 'sqp', ...
-    'Display', 'none', ...
-    'MaxIterations', 20, ...
-    'MaxFunctionEvaluations', 600, ...
+    'Display', 'iter-detailed', ...
+    'MaxIterations', 10, ...
+    'MaxFunctionEvaluations', 200, ...
     'ConstraintTolerance', 1e-4, ...
     'OptimalityTolerance', 1e-3, ...
     'StepTolerance', 1e-6);
