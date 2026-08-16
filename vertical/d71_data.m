@@ -24,7 +24,7 @@ P_p_un_max = 0.2; % maximum motor input signal [ 1 ]
 P_p_un_min = -P_p_un_max; % minimum motor input signal [ 1 ]
 P_p_kd0 = 0.04; % disturbance const. static friction [ ]
 P_p_kd1 = 0.15; % disturbance const. cornering resistance [ ]
-P_p_vRef = 0.5;
+P_p_vRef = 0.3;
 P_p_aMax = 1.0;
 
 % car 10

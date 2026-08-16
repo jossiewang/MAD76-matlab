@@ -1,7 +1,7 @@
 %% params_lqr used in mpc
 
 %% Horizon and sampling
-params_lqr.N  = 20;          % prediction horizon
+params_lqr.N  = 10;          % prediction horizon
 params_lqr.Ta = 25e-3;       % sampling time [s]
 
 %% Reference generator
@@ -34,9 +34,17 @@ params_lqr.l  = 32.5e-3;     % wheelbase [m]
 % params_lqr.integrator = 'euler';     % 'euler' first, later try 'rk4'
 
 %% weight matrices
-Q = diag([500, 500, 100]);
-R = 1;
-P = diag([1500, 1500, 300]);
+% b
+% Q = diag([500, 500, 1]);
+% R = 1;
+% P = diag([1000, 1000, 1]);
+
+% best lap time (hand), vRef=0.4
+% best tracking (hand), vRef=0.3
+Q = diag([8000, 8000, 10]);
+R = 5;
+P = diag([8000, 8000, 10]);
+
 params_lqr.weights = struct('Q', Q, 'R', R, 'P', P);
 
 %% Optional constraints
