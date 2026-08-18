@@ -26,6 +26,7 @@ P_p_kd0 = 0.04; % disturbance const. static friction [ ]
 P_p_kd1 = 0.15; % disturbance const. cornering resistance [ ]
 P_p_vRef = 0.1;
 P_p_aMax = 1.0;
+P_p_uref = 0.15;
 
 % car 10
 % P_p_k = 3.2; % gain [ m/s ]
