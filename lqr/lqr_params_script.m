@@ -41,9 +41,13 @@ params_lqr.l  = 32.5e-3;     % wheelbase [m]
 
 % best lap time (hand), vRef=0.4
 % best tracking (hand), vRef=0.3
-Q = diag([8000, 8000, 10]);
-R = 5;
-P = diag([8000, 8000, 10]);
+% Q = diag([8000, 8000, 10]);
+% R = 5;
+% P = diag([8000, 8000, 10]);
+
+Q = diag([8000, 100]);
+R = 1;
+P = diag([8000, 100]);
 
 params_lqr.weights = struct('Q', Q, 'R', R, 'P', P);
 

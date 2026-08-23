@@ -31,7 +31,7 @@ s_car = single([s(1); s(2)]);
 N  = params.N;
 Ta = single(params.Ta);
 Tt = single(params.Tt);
-params.v_ref = double(vr);
+% params.v_ref = double(vr);
 
 %% Extract spline bus data
 breakslen = int32(SPLINE.breakslen);
