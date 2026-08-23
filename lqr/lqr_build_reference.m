@@ -31,7 +31,7 @@ s_car = single([s(1); s(2)]);
 N  = params.N;
 Ta = single(params.Ta);
 Tt = single(params.Tt);
-% params.v_ref = double(vr);
+params.v_ref = double(vr);
 
 %% Extract spline bus data
 breakslen = int32(SPLINE.breakslen);
@@ -63,7 +63,7 @@ end
     ppcoefs, ...
     periodic, ...
     v_ref(1), ...
-    Tt, ...
+    Tt, ... % this is only for look ahead kappa, which we didn't use
     int32(1), ...
     breakslen);
 
@@ -72,6 +72,7 @@ x0_star = w0(1);
 %% 2) Build MPC preview arc lengths
 x_ref = zeros(1, N+1, 'single');
 x_ref(1) = x0_star;
+x_ref(1) = x_ref(1) + Tt*v_ref(1);
 
 for i = 2:N+1
     x_ref(i) = x_ref(i-1) + Ta * v_ref(i-1);

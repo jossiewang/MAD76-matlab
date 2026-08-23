@@ -1,12 +1,12 @@
 %% params_lqr used in mpc
 
 %% Horizon and sampling
-params_lqr.N  = 10;          % prediction horizon
+params_lqr.N  = 20;          % prediction horizon
 params_lqr.Ta = 25e-3;       % sampling time [s]
 
 %% Reference generator
 params_lqr.v_ref = P_p_vRef;     % desired speed [m/s], start conservative
-params_lqr.Tt    = 0; % 100e-3;   % delay/lookahead time [s]
+params_lqr.Tt    = 100e-3;   % delay/lookahead time [s]
 % params_lqr.periodic = true;  % true for closed race track
 
 %% Input limits from MAD76 slides
