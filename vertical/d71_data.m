@@ -24,7 +24,7 @@ P_p_un_max = 0.2; % maximum motor input signal [ 1 ]
 P_p_un_min = -P_p_un_max; % minimum motor input signal [ 1 ]
 P_p_kd0 = 0.04; % disturbance const. static friction [ ]
 P_p_kd1 = 0.15; % disturbance const. cornering resistance [ ]
-P_p_vRef = 0.1;
+P_p_vRef = 0.2;
 P_p_aMax = 1.0;
 P_p_uref = 0.15;
 
@@ -56,6 +56,7 @@ P_p_l = 32.5e-3; % wheel base [ m ]
 P_p_lr = 0.5 * P_p_l;
 P_p_lf = 0.5 * P_p_l;
 P_p_delta_Tt = P_p_uTt; % servo dead time [ s ]
+P_p_Tsteer = 0.3;
 
 %% Geometry
 P_p_rearaxle_1 = P_p_lr; % distance between IMU and rear axle [ m ]

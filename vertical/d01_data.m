@@ -55,7 +55,6 @@ P_p_l = abs(P_p_frontaxle_1 + P_p_rearaxle_1); % wheel base [ m ]
 P_p_lr = P_p_rearaxle_1;
 P_p_lf = P_p_frontaxle_1;
 P_p_delta_Tt = P_p_uTt; % servo dead time [ s ]
-P_p_Tsteer = 0.3;
 
 %% Longitudinal disturbance
 P_p_un_friction_kd0 = 0.2; % dead zone

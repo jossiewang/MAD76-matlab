@@ -10,6 +10,7 @@
 
 %% Add Path MODBAS CAR MATLAB Lib
 addpath('../mbc');
+addpath('../lqr');
 
 %% Clear Workspace
 clear all;
@@ -28,6 +29,7 @@ d01_data;
 %% MAD76
 d71_data;
 t71_mad76_small;
+lqr_params_script;
 
 %% Location
 P_c_locate_problist = ones(P_car_cnt, 1, 'single'); % observer all cars
