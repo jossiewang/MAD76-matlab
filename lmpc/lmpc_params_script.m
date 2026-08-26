@@ -13,6 +13,7 @@ lmpc_params.ku = P_p_k;
 %% MPC weights
 lmpc_params.Q = diag([1, 1, 1000, 10]);
 lmpc_params.R = diag([1, 1]);
+lmpc_params.Rdu = diag([10, 1]);
 lmpc_params.P = lmpc_params.Q;
 
 %% actuator constraints

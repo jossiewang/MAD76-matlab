@@ -3,21 +3,48 @@ function [H, f, Aineq, bineq, lb, ub] = ...
         xe0, Phi, Gamma, refs, ...
         u_prev_phys, params)
 
-%% Cost
+%% Base state/input cost
+
 [H, f] = ...
     lmpc_build_cost( ...
         xe0, Phi, Gamma, params);
 
 
-%% Magnitude constraints
+%% Input magnitude bounds
+
 [lb, ub] = ...
     lmpc_build_input_bounds( ...
         refs, params);
 
 
+%% Physical input-rate model
+
+[D, d] = ...
+    lmpc_build_rate_model( ...
+        refs, ...
+        u_prev_phys, ...
+        params);
+
+
+%% Input-rate cost
+
+[Hdu, fdu] = ...
+    lmpc_build_rate_cost( ...
+        D, d, params);
+
+H = H + Hdu;
+f = f + fdu;
+
+
 %% Input-rate constraints
+
 [Aineq, bineq] = ...
     lmpc_build_rate_constraints( ...
-        refs, u_prev_phys, params);
+        D, d, params);
+
+
+%% Numerical symmetry
+
+H = 0.5 * (H + H');
 
 end
