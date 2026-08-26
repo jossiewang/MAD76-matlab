@@ -11,6 +11,7 @@
 %% Add Path MODBAS CAR MATLAB Lib
 addpath('../mbc');
 addpath('../mpc');
+addpath('../lmpc');
 
 %% Clear Workspace
 clear all;
@@ -32,6 +33,7 @@ t71_mad76_small;
 
 %% mpc params
 mpc_params_script;
+lmpc_params_script;
 
 %% Location
 P_c_locate_problist = ones(P_car_cnt, 1, 'single'); % observer all cars
