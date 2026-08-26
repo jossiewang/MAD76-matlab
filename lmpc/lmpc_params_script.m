@@ -19,9 +19,9 @@ lmpc_params.P = lmpc_params.Q;
 lmpc_params.u_min = [-0.2; -deg2rad(22)];
 lmpc_params.u_max = [ 0.2;  deg2rad(22)];
 
-% %% rate constraints
-% lmpc_params.du_min = [...];
-% lmpc_params.du_max = [...];
+%% rate constraints
+lmpc_params.du_min = [-0.0936; -1.14];
+lmpc_params.du_max = [0.0936; 1.14];
 % 
 % %% state constraints
 % lmpc_params.x_min = [...];
