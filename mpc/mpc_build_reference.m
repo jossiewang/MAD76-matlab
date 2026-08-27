@@ -70,7 +70,7 @@ x0_star = w0(1);
 
 %% 2) Build MPC preview arc lengths
 x_ref = zeros(1, N+1, 'single');
-x_ref(1) = x0_star;
+x_ref(1) = x0_star;% + Tt * z0(1);
 
 for i = 2:N+1
     x_ref(i) = x_ref(i-1) + Ta * v_ref(i-1);
@@ -98,7 +98,8 @@ n_ref = [-sin(psi_ref);
           cos(psi_ref)];
 
 %% 6) Lookahead curvature
-x_hat = x_ref + v_ref * Tt;
+% x_hat = x_ref + v_ref * Tt;
+x_hat = x_ref;
 
 if ~periodic
     x_hat = min(max(x_hat, single(0)), x_end);

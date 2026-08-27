@@ -1,44 +1,74 @@
-function [c, ceq] = mpc_constraints(U, z0, refs, params)
+function [c, ceq] = ...
+    mpc_constraints(U, z0, u_delay, refs, params)
 
-    U      = double(U(:));
-    z      = double(z0(:));
+U       = double(U(:));
+z       = double(z0(:));
+u_delay = double(u_delay);
 
-    N = params.N;
+N  = params.N;
+nd = size(u_delay,2);
 
-    v_min = params.v_min;
-    v_max = params.v_max;
-    track_half_width = params.track_half_width;
+v_min = params.v_min;
+v_max = params.v_max;
 
-    c = zeros(4*N, 1);
-    ceq = [];
+track_half_width = params.track_half_width;
 
-    k = 1;
+c = zeros(4*N,1);
+ceq = [];
 
-    for i = 1:N
-        idx = 2*i - 1;
-        un_i     = U(idx);
-        deltan_i = U(idx+1);
+k = 1;
 
-        % Predict next state
-        u_i = [un_i; deltan_i];
-        z = mpc_model_step(z, u_i, params);
+for i = 1:N
 
-        % Speed constraints
-        vr = z(1);
-        c(k) = vr - v_max;           k = k + 1;
-        c(k) = v_min - vr;           k = k + 1;
+    %% ================================================================
+    % Determine input ACTUALLY affecting vehicle
 
-        % Lateral corridor constraint
-        ds1 = z(2) - refs.s(1, i+1);
-        ds2 = z(3) - refs.s(2, i+1);
+    if i <= nd
 
-        n1 = refs.n(1, i+1);
-        n2 = refs.n(2, i+1);
+        u_applied = u_delay(:,i);
 
-        s_c2e = ds1*n1 + ds2*n2;
+    else
 
-        c(k) =  s_c2e - track_half_width;  k = k + 1;
-        c(k) = -s_c2e - track_half_width;  k = k + 1;
+        j = i - nd;
+
+        idx = 2*j - 1;
+
+        u_applied = U(idx:idx+1);
 
     end
+
+
+    %% Predict next state
+    z = mpc_model_step(z, u_applied, params);
+
+
+    %% Speed constraints
+
+    vr = z(1);
+
+    c(k) = vr - v_max;
+    k = k + 1;
+
+    c(k) = v_min - vr;
+    k = k + 1;
+
+
+    %% Track corridor
+
+    ds1 = z(2) - refs.s(1,i+1);
+    ds2 = z(3) - refs.s(2,i+1);
+
+    n1 = refs.n(1,i+1);
+    n2 = refs.n(2,i+1);
+
+    s_c2e = ds1*n1 + ds2*n2;
+
+    c(k) = s_c2e - track_half_width;
+    k = k + 1;
+
+    c(k) = -s_c2e - track_half_width;
+    k = k + 1;
+
+end
+
 end
