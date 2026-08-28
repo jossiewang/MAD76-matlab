@@ -40,16 +40,16 @@ lmpc_params.Rdu = diag([100, 100]);
 lmpc_params.P = lmpc_params.Q;
 
 %% actuator constraints
-lmpc_params.u_min = [-0.2; -deg2rad(22)];
+lmpc_params.u_min = [-0.2; -deg2rad(22)]; % min is actually not used in code, symmetric assumed
 lmpc_params.u_max = [ 0.2;  deg2rad(22)];
 
+%% conversion
+lmpc_params.delta_norm_gain = 0.93 / deg2rad(22);
+
 %% rate constraints
-lmpc_params.du_min = [-0.0936; -1.14];
-lmpc_params.du_max = [0.0936; 1.14];
+lmpc_params.du_min = [-0.0936; -1.14/lmpc_params.delta_norm_gain];
+lmpc_params.du_max = [0.0936; 1.14/lmpc_params.delta_norm_gain];
 % 
 % %% state constraints
 % lmpc_params.x_min = [...];
 % lmpc_params.x_max = [...];
-
-%% conversion
-lmpc_params.delta_norm_gain = 0.93 / deg2rad(22);
