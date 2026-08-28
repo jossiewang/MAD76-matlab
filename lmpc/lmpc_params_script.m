@@ -23,9 +23,20 @@ lmpc_params.T  = P_p_T;
 lmpc_params.ku = P_p_k;
 
 %% MPC weights
-lmpc_params.Q = diag([1, 1, 1000, 10]);
+v_scale   = 0.10;   % [m/s]
+sc1_scale = 0.05;   % [m]
+sc2_scale = 0.06;   % [m]
+psi_scale = 0.50;   % [rad]
+
+% lmpc_params.Q = diag([1, 1, 1000, 10]);
+lmpc_params.Q = diag([
+    5    / v_scale^2
+    0.2  / sc1_scale^2
+    10   / sc2_scale^2
+    5    / psi_scale^2
+    ]);
 lmpc_params.R = diag([1, 1]);
-lmpc_params.Rdu = diag([10, 1]);
+lmpc_params.Rdu = diag([100, 100]);
 lmpc_params.P = lmpc_params.Q;
 
 %% actuator constraints
