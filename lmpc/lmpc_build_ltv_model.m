@@ -69,6 +69,7 @@ for i = 1:N
     Ac(2,3) = v_ref * kappa_ref;
 
     % s_c2e_dot
+    Ac(3,2) = -v_ref * kappa_ref;
     Ac(3,4) = v_ref;
 
     % psi_e_dot
