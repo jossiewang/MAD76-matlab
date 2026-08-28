@@ -15,7 +15,7 @@ addpath('../lqr');
 addpath('../lmpc');
 
 %% Clear Workspace
-clear all;
+% clear all;
 
 %% Solver Settings
 P_dt = 25e-3; % Sampling time of controller and planner
@@ -31,9 +31,9 @@ d01_data;
 %% MAD76
 d71_data;
 t71_mad76_small;
-lqr_params_script;
+% lqr_params_script;
 % mpc_params_script;
-lmpc_params_script;
+% lmpc_params_script;
 
 %% Location
 P_c_locate_problist = ones(P_car_cnt, 1, 'single'); % observer all cars
