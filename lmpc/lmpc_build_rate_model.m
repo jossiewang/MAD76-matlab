@@ -1,54 +1,83 @@
 function [D, d] = ...
-    lmpc_build_rate_model(refs, u_prev_phys, params)
+    lmpc_build_rate_model( ...
+        u_ref, ...
+        u_prev_phys, ...
+        params)
 %LMPC_BUILD_RATE_MODEL
 %
 % Builds
 %
-%   Delta U_phys = D*U + d
+%   DeltaU_phys = D*U + d
 %
 % where U is the stacked deviation-input sequence.
+%
+% Physical input:
+%
+%   u_phys,i = u_ref,i + u_e,i
+%
+% First rate:
+%
+%   Delta u_phys,0 =
+%       u_phys,0 - u_prev_phys
+%
+% Remaining:
+%
+%   Delta u_phys,i =
+%       u_phys,i - u_phys,i-1
 
 N  = params.N;
 nu = 2;
 
-%% Difference matrix
+%% ==============================================================
+% Difference matrix
+% ==============================================================
 
 D = zeros(nu*N, nu*N);
 
-for i = 1:N
+Iu = eye(nu);
+
+% First input
+D(1:nu,1:nu) = Iu;
+
+for i = 2:N
 
     rows = (i-1)*nu + (1:nu);
 
-    % current deviation input
-    cols = (i-1)*nu + (1:nu);
-    D(rows,cols) = eye(nu);
+    cols_prev = (i-2)*nu + (1:nu);
+    cols_curr = (i-1)*nu + (1:nu);
 
-    if i > 1
-        cols_prev = (i-2)*nu + (1:nu);
-        D(rows,cols_prev) = -eye(nu);
-    end
+    D(rows,cols_prev) = -Iu;
+    D(rows,cols_curr) =  Iu;
 
 end
 
-%% Stack reference physical inputs
 
-Uref = zeros(nu*N,1);
+%% ==============================================================
+% Reference/previous-input offset
+%
+% d =
+%
+% [u_ref,0 - u_prev_phys;
+%  u_ref,1 - u_ref,0;
+%  ...
+%  u_ref,N-1 - u_ref,N-2]
+% ==============================================================
 
-for i = 1:N
+d = zeros(nu*N,1);
+
+% First rate
+d(1:nu) = ...
+    u_ref(:,1) - u_prev_phys;
+
+% Remaining rates
+for i = 2:N
 
     rows = (i-1)*nu + (1:nu);
 
-    Uref(rows) = refs.u_ref(:,i);
+    d(rows) = ...
+        u_ref(:,i) - ...
+        u_ref(:,i-1);
 
 end
-
-%% Previous physical input
-
-Euprev = zeros(nu*N,1);
-Euprev(1:nu) = u_prev_phys;
-
-%% Affine part
-
-d = D*Uref - Euprev;
 
 end

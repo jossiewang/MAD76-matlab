@@ -5,6 +5,18 @@ lmpc_params.v_ref = 0.2;
 lmpc_params.Ta = 0.025;
 lmpc_params.N  = 20;
 
+lmpc_params.Nd = round( ...
+    lmpc_params.Tt / lmpc_params.Ta);
+
+lmpc_params.u_init = [
+    0;
+    0
+    ];
+
+assert(abs( ...
+    lmpc_params.Nd*lmpc_params.Ta ...
+    - lmpc_params.Tt) < 1e-9);
+
 %% vehicle model
 lmpc_params.l  = P_p_l;
 lmpc_params.T  = P_p_T;

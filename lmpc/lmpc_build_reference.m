@@ -99,7 +99,7 @@ n_ref = [-sin(psi_ref);
           cos(psi_ref)];
 
 %% 6) Lookahead curvature
-x_hat = x_ref + v_ref * Tt;
+x_hat = x_ref;% + v_ref * Tt;
 
 if ~periodic
     x_hat = min(max(x_hat, single(0)), x_end);

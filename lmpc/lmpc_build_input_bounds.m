@@ -1,23 +1,23 @@
-function [lb, ub] = lmpc_build_input_bounds(refs, params)
+function [lb, ub] = ...
+    lmpc_build_input_bounds(u_ref, params)
 %LMPC_BUILD_INPUT_BOUNDS
 %
-% Converts physical actuator limits into bounds on the deviation-input
-% decision vector U.
+% u_ref : nu x N physical feedforward input sequence
 %
-% Physical input:
-%
-%   u_phys = u_ref + u_e
-%
-% therefore
-%
-%   u_min - u_ref <= u_e <= u_max - u_ref
-%
-% Stacked QP decision vector:
+% QP variable:
 %
 %   U = [u_e,0;
 %        u_e,1;
 %        ...
 %        u_e,N-1]
+%
+% Physical input:
+%
+%   u_phys = u_ref + u_e
+%
+% Therefore:
+%
+%   u_min - u_ref <= u_e <= u_max - u_ref
 
 N  = params.N;
 nu = 2;
@@ -32,10 +32,10 @@ for i = 1:N
 
     rows = (i-1)*nu + (1:nu);
 
-    uref = refs.u_ref(:,i);
+    uref_i = u_ref(:,i);
 
-    lb(rows) = u_min - uref;
-    ub(rows) = u_max - uref;
+    lb(rows) = u_min - uref_i;
+    ub(rows) = u_max - uref_i;
 
 end
 
