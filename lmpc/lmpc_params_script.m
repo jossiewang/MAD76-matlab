@@ -1,7 +1,7 @@
 % lmpc_params_lmpc
 
 lmpc_params.Tt = P_p_Tt;
-lmpc_params.v_ref = 0.5;
+lmpc_params.v_ref = 0.2;
 lmpc_params.Ta = 0.025;
 lmpc_params.N  = 20;
 
